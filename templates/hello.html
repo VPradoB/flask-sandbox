@@ -1,23 +1,16 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Flask Api</title>
-</head>
-<body>
-    <h1>Flask Api</h1>
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}]
+{% block title %} {{ super() }} Home {% endblock title %}
+
+{% block content %}
     {% if user_ip %}
-    <h1>Hello world, your IP address is {{ user_ip }}</h1>
+        <h1>Hello world, your IP address is {{ user_ip }}</h1>
     {% else %}
-    <a href="{{ url_for('index') }}">redirect to home page</a>
+        <a href="{{ url_for('index') }}">redirect to home page</a>
     {% endif %}
     <ul>
         {% for todo in todos %}
-            <li>{{ todo }}</li>
+            {{macro.render_todo(todo)}}
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}
