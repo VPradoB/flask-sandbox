@@ -9,6 +9,15 @@
 </head>
 <body>
     <h1>Flask Api</h1>
+    {% if user_ip %}
     <h1>Hello world, your IP address is {{ user_ip }}</h1>
+    {% else %}
+    <a href="{{ url_for('index') }}">redirect to home page</a>
+    {% endif %}
+    <ul>
+        {% for todo in todos %}
+            <li>{{ todo }}</li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
