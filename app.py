@@ -2,6 +2,17 @@ from flask import Flask, request, make_response, redirect, render_template
 app = Flask(__name__)
 todos = ['Comprar cafe', 'Enviar solicitud de compra', 'Entregar solicitud de compra']
 
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', error=error), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('500.html', error=error), 500
+
+
 @app.route('/hello')
 def hello_world():
     user_ip = request.cookies.get('user_ip')
@@ -9,7 +20,7 @@ def hello_world():
         'user_ip': user_ip,
         'todos': todos
     }
-    return render_template('hello.html', **context)
+    return render_template('aaa.html', **context)
 
 
 @app.route('/')
