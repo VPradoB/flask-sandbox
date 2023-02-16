@@ -3,14 +3,33 @@
 {% block title %} {{ super() }} Home {% endblock title %}
 
 {% block content %}
+    {% if username != None %}
+        <h1>Welcome {{ username }}</h1>
+    {% endif %}
     {% if user_ip %}
-        <h1>Hello world, your IP address is {{ user_ip }}</h1>
+        <h3>Hello world, your IP address is {{ user_ip }}</h3>
     {% else %}
         <a href="{{ url_for('index') }}">redirect to home page</a>
     {% endif %}
+    {% if username == None %}
+        <div class="container">
+            <form action="{{ url_for('login') }}" method="post">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Email address</label>
+                    {{ login_form.username }}
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    {{ login_form.password }}
+                </div>
+
+                {{ login_form.submit }}
+            </form>
+        </div>
+    {% endif %}
     <ul>
         {% for todo in todos %}
-            {{macro.render_todo(todo)}}
+            {{ macro.render_todo(todo) }}
         {% endfor %}
     </ul>
 {% endblock %}
